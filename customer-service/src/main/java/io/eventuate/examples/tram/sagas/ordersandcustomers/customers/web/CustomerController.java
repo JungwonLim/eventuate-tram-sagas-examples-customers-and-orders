@@ -36,4 +36,11 @@ public class CustomerController {
             .map(c -> new ResponseEntity<>(new GetCustomerResponse(c.getId(), c.getName(), c.getCreditLimit()), HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
+
+
+  @RequestMapping(value = "/customers1", method = RequestMethod.POST)
+  public CreateCustomerResponse createCustomer1(@RequestBody CreateCustomerRequest createCustomerRequest) {
+    Customer customer = customerService.createCustomer(createCustomerRequest.getName(), createCustomerRequest.getCreditLimit());
+    return new CreateCustomerResponse(customer.getId());
+  }
 }
